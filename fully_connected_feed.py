@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#coding:utf-8
+
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -160,7 +163,7 @@ def run_training():
     sess.run(init)
 
     # Start the training loop.
-    for step in xrange(FLAGS.max_steps):
+    for step in xrange(FLAGS.max_steps+30000):
       start_time = time.time()
 
       # Fill a feed dictionary with the actual set of images and labels
