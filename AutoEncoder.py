@@ -106,8 +106,6 @@ with tf.Session() as sess:
         # Display logs per step
         if i % display_step == 0 or i == 1:
             print('Step %i: Minibatch Loss: %f' % (i, l))
-
-    # Testing
     # Encode and decode images from test set and visualize their reconstruction.
     n = 4
     canvas_orig = np.empty((28 * n, 28 * n))
