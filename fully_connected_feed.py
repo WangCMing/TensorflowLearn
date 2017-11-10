@@ -28,7 +28,7 @@ from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
-from tensorflow.examples.tutorials.mnist import mnist
+import mnist as mnist
 
 # Basic model parameters as external flags.
 FLAGS = None
@@ -123,10 +123,10 @@ def run_training():
   with tf.Graph().as_default():
     # Generate placeholders for the images and labels.
     images_placeholder, labels_placeholder = placeholder_inputs(
-        FLAGS.batch_size)
+        FLAGS.batch_size)       
 
     # Build a Graph that computes predictions from the inference model.
-    logits = mnist.inference(images_placeholder,
+    logits = mnist.inference(images_placeholder,      #获得神经网络Graph的终节点
                              FLAGS.hidden1,
                              FLAGS.hidden2)
 
