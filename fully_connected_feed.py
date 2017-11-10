@@ -163,7 +163,7 @@ def run_training():
     sess.run(init)
 
     # Start the training loop.
-    for step in xrange(FLAGS.max_steps+30000):
+    for step in xrange(FLAGS.max_steps):
       start_time = time.time()
 
       # Fill a feed dictionary with the actual set of images and labels
