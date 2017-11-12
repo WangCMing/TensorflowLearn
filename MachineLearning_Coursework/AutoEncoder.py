@@ -21,9 +21,9 @@ examples_to_show = 10
 num_hidden_1 = 256 # 1st layer num features
 num_hidden_2 = 128 # 2nd layer num features (the latent dim)
 num_input = 784 # MNIST data input (img shape: 28*28)
-learning_rate =0.01
+learning_rate =0.1
 
-FILEPATH ='/home/wcm/TensorflowLearn/output/AE_rate=0.01_RMSPro/'
+FILEPATH ='/home/wcm/TensorflowLearn/output/AE_rate=0.1_RMSPro/'
 
 x = tf.placeholder("float",[None,num_input])
 x_reshape = tf.reshape(x,[-1,28,28,1])

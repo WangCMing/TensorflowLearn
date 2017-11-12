@@ -11,8 +11,8 @@ x = tf.placeholder("float", shape=[None, 784])
 y_ = tf.placeholder("float", shape=[None, 10])
 sess = tf.InteractiveSession(config = tf.ConfigProto(log_device_placement=True))
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
-FILEPATH = '/home/wcm/TensorflowLearn/output/CNN_rate=0.01_RMSPro/'
-
+FILEPATH = '/home/wcm/TensorflowLearn/output/CNN_rate=0.05_RMSPro/'
+LEARN_RATE = 0.05
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
@@ -96,7 +96,7 @@ with tf.name_scope("FC_Sotfmax_layer"):
 with tf.name_scope("train_op"):
   cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv)) 
   tf.summary.scalar("cross_entropy",cross_entropy)
-  train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)#使用AdamOptimizer优化算法（并非梯度优化算法）
+  train_step = tf.train.AdamOptimizer(LEARN_RATE).minimize(cross_entropy)#使用AdamOptimizer优化算法（并非梯度优化算法）
   correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1)) #y_conv是模型输出,y_是标签
   accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))     #计算正确率百分比
   
