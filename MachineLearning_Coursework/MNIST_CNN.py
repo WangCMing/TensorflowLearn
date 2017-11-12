@@ -11,7 +11,7 @@ x = tf.placeholder("float", shape=[None, 784])
 y_ = tf.placeholder("float", shape=[None, 10])
 sess = tf.InteractiveSession(config = tf.ConfigProto(log_device_placement=True))
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
-
+FILEPATH = '/home/wcm/TensorflowLearn/output/CNN_rate=0.01_RMSPro/'
 
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
@@ -110,7 +110,7 @@ with tf.name_scope("test_op"):
   accuracy_1 = tf.reduce_mean(tf.cast(correct_prediction, "float"))   #计算正确率百分比
   tf.summary.scalar("accuracy_test",accuracy_1)
 
-summary_writer = tf.summary.FileWriter('/tmp/tensorflow/MachineLearning_Courseswork/', sess.graph)
+summary_writer = tf.summary.FileWriter(FILEPATH, sess.graph)
 summary = tf.summary.merge_all()
 
 sess.run(tf.initialize_all_variables())
