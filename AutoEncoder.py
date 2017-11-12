@@ -73,24 +73,25 @@ def decoder(x):
     return layer_2
 
 # Construct model
-encoder_op = encoder(X)
-decoder_op = decoder(encoder_op)
+with tf.device('/gpu:0'):
+    encoder_op = encoder(X)
+    decoder_op = decoder(encoder_op)
 
 # Prediction
-y_pred = decoder_op
+    y_pred = decoder_op
 # Targets (Labels) are the input data.
-y_true = X
+    y_true = X
 
 # Define loss and optimizer, minimize the squared error
-loss = tf.reduce_mean(tf.pow(y_true - y_pred, 2))
-optimizer = tf.train.RMSPropOptimizer(learning_rate).minimize(loss)
+    loss = tf.reduce_mean(tf.pow(y_true - y_pred, 2))
+    optimizer = tf.train.RMSPropOptimizer(learning_rate).minimize(loss)
 
 # Initialize the variables (i.e. assign their default value)
-init = tf.global_variables_initializer()
+    init = tf.global_variables_initializer()
 
 # Start Training
 # Start a new TF session
-with tf.Session() as sess:
+with tf.Session(config = tf.ConfigProto(log_device_placement=True)) as sess:
 
     # Run the initializer
     sess.run(init)
