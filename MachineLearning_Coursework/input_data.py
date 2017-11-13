@@ -21,9 +21,25 @@ from __future__ import print_function
 import gzip
 import os
 import tempfile
-
-import numpy
+import numpy as np
 from six.moves import urllib
-from six.moves import xrange  # pylint: disable=redefined-builtin
+from six.moves import xrange  
 import tensorflow as tf
-from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
+import csv
+
+DATASET_DIR = 'ratings.csv'
+
+def get_date_set():
+    TRAIN_SET = np.zeros(shape=[601,163950], dtype=float)
+    TEST_SET = np.zeros(shape=[72,163950], dtype=float)
+    with open(DATASET_DIR) as f:
+        f_csv = csv.reader(f)
+        headers = next(f_csv)
+        for row in f_csv:
+            if((int(row[0]))>=600):
+                break
+            TRAIN_SET[int(row[0])][int(row[1])] = (row[2])
+        print("break_______________")
+        for row in f_csv:
+            TEST_SET[int(row[0])-600][int(row[1])] = (row[2])
+    return DATASET_DIR,TEST_SET
