@@ -18,7 +18,7 @@ num_hidden_3 = 256
 
 learning_rate =0.01
 
-FILEPATH ='/home/wcm/TensorflowLearn/output/AE_rate=0.1_RMSPro/'
+FILEPATH ='~/TensorflowLearn/output/AE_rate=0.1_RMSPro/'
 
 x = tf.placeholder("float",[None,num_input])
 
