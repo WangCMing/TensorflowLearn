@@ -6,19 +6,20 @@ import Tkinter
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-import input_data as idate
+import input_data 
 # Import data
 TRAIN_SET,TEST_SET = idate.get_date_set()
+mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
-num_input = 163950
+num_input = 784
+num_hidden_1 = 512
+num_hidden_2 = 256
+num_steps
 
-num_hidden_1 = 4096*2
-num_hidden_2 = 1024
-num_hidden_3 = 256
-
+display_step = 100
 learning_rate =0.01
 
-FILEPATH ='~/TensorflowLearn/output/AE_rate=0.1_RMSPro/'
+FILEPATH ='output/AE/AE_rate=0.1_RMSPro/'
 
 x = tf.placeholder("float",[None,num_input])
 

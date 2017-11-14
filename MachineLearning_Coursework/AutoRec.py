@@ -7,15 +7,6 @@ import tensorflow as tf
 import numpy as np
 
 # Import date
-'''
-9125个电影
-100004个评分
-671个用户
-
-输入之前要先对数据进行转换:
-    对每个用户的数据都扩展到9125个
-    将用户分为450 和221个 前一部分做训练集\后一部分做测试集
-'''
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
@@ -29,9 +20,9 @@ examples_to_show = 10
 num_hidden_1 = 256 # 1st layer num features
 num_hidden_2 = 128 # 2nd layer num features (the latent dim)
 num_input = 784 # MNIST data input (img shape: 28*28)
-learning_rate =0.01
+learning_rate =0.1
 
-FILEPATH ='/home/wcm/TensorflowLearn/output/AE_rate=0.01_RMSPro/'
+FILEPATH ='~/TensorflowLearn/output/AE/AE_rate=0.1_RMSPro/'
 
 x = tf.placeholder("float",[None,num_input])
 x_reshape = tf.reshape(x,[-1,28,28,1])
@@ -39,7 +30,7 @@ tf.summary.image("x",x_reshape)
 with tf.name_scope('encoder_layer1'):
     weight = tf.Variable(tf.random_normal([num_input,num_hidden_1]))
     biases = tf.Variable(tf.random_normal([num_hidden_1]))
-    encoder_layer1 = tf.nn.sigmoid(tf.add(tf.matmul(x,weight),biases))
+    encoder_layer1 = tf.nn.sigmoid(tf.matmul(x,weight)+biases)
 
 with tf.name_scope('encoder_layer2'):
     weight = tf.Variable(tf.random_normal([num_hidden_1,num_hidden_2]))
