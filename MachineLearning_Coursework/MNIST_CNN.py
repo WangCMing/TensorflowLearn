@@ -43,7 +43,7 @@ with tf.name_scope("Conv1_layer") :
   W_conv1 = weight_variable([5, 5, 1, 32])    #patch =5x5 深度为1 每个像素输出通道为32 size = 28x28x32
   b_conv1 = bias_variable([32])
   h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)    #进行卷积操作，得到输出，之后使用RELU(cov(x,W)+b)后的输出
-    = max_pool_2x2(h_conv1) #输出进行池化操作   14x14x32
+  h_pool1 = max_pool_2x2(h_conv1) #输出进行池化操作   14x14x32
 
 '''
 第二层卷积
