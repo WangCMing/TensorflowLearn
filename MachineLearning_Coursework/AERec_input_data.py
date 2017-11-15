@@ -24,22 +24,26 @@ import tempfile
 import numpy as np
 from six.moves import urllib
 from six.moves import xrange  
-import tensorflow as tf
 import csv
-
+import tensorflow as tf
 DATASET_DIR = 'ratings.csv'
 
 def get_date_set():
-    TRAIN_SET = np.zeros(shape=[601,163950], dtype=float)
-    TEST_SET = np.zeros(shape=[72,163950], dtype=float)
+    DATA_SET =np.zeros(shape=[672,163950], dtype=float)
     with open(DATASET_DIR) as f:
         f_csv = csv.reader(f)
         headers = next(f_csv)
         for row in f_csv:
-            if((int(row[0]))>=600):
-                break
-            TRAIN_SET[int(row[0])][int(row[1])] = (row[2])
-        print("break_______________")
-        for row in f_csv:
-            TEST_SET[int(row[0])-600][int(row[1])] = (row[2])
-    return DATASET_DIR,TEST_SET
+            DATA_SET[int(row[0])][int(row[1])] = (row[2])
+    DATA_SET = tf.convert_to_tensor(DATA_SET,dtype=tf.float32)
+    partitions = np.random.randint(0,2,(1,672))
+    partitions = partitions.repeat(163950)
+    partitions = tf.convert_to_tensor(partitions,dtype = tf.int32)
+    partitions = tf.reshape(partitions,[672,163950])
+    
+    TRAIN_SET,TEST_SET = tf.dynamic_partition(DATA_SET,partitions,2)
+    return TRAIN_SET,TEST_SET
+
+with tf.Session() as sess:
+    np.set_printoptions(threshold='nan')
+    print(sess.run(get_date_set()))

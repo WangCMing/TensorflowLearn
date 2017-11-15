@@ -6,16 +6,15 @@ import Tkinter
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-import input_data 
+from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 # Import data
-TRAIN_SET,TEST_SET = idate.get_date_set()
-mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+mnist = read_data_sets('MNIST_data', one_hot=True)
 
 num_input = 784
 num_hidden_1 = 512
 num_hidden_2 = 256
-num_steps
-
+num_steps = 300
+batch_size = 50
 display_step = 100
 learning_rate =0.01
 

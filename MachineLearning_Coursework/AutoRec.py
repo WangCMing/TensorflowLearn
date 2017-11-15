@@ -5,28 +5,27 @@ from __future__ import division, print_function, absolute_import
 import Tkinter
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
+from AERec_input_data import get_date_set
 
-# Import date
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
-num_steps = 30000
-batch_size = 256
 
+#parameters
+num_input = 163950
+num_hidden_1 = 1024*32
+num_hidden_2 = 1024*8
+num_hidden_3 = 1024
+num_steps = 50000
+batch_size = 50
 display_step = 100
-examples_to_show = 10
+learning_rate =0.01
+FILEPATH ='output/AE/AE_rate=0.1_RMSPro/'
 
-# Network Parameters
-num_hidden_1 = 256 # 1st layer num features
-num_hidden_2 = 128 # 2nd layer num features (the latent dim)
-num_input = 784 # MNIST data input (img shape: 28*28)
-learning_rate =0.1
-
-FILEPATH ='~/TensorflowLearn/output/AE/AE_rate=0.1_RMSPro/'
+# Import data
+DATE_SET,TEST_SET = get_date_set()
 
 x = tf.placeholder("float",[None,num_input])
-x_reshape = tf.reshape(x,[-1,28,28,1])
-tf.summary.image("x",x_reshape)
+
 with tf.name_scope('encoder_layer1'):
     weight = tf.Variable(tf.random_normal([num_input,num_hidden_1]))
     biases = tf.Variable(tf.random_normal([num_hidden_1]))
@@ -49,8 +48,6 @@ with tf.name_scope('decoder_layer_2'):
 
 y_pre  = decoder_layer_2
 y_true = x
-y_pre_reshape = tf.reshape(y_pre,[-1,28,28,1])
-tf.summary.image("y_pre",y_pre_reshape)
 #define loss and optimizer
 
 loss = tf.reduce_mean(tf.pow(y_true-y_pre,2))

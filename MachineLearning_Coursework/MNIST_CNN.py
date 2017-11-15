@@ -5,14 +5,14 @@ vanilla版本的CNN实现：
 1步长（stride size），0边距（padding size）的模板，保证输出和输入是同一个大小。
 用简单传统的2x2大小的模板做max pooling。
 '''
-from tensorflow.examples.tutorials.mnist import input_data
+from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 import tensorflow as tf
 x = tf.placeholder("float", shape=[None, 784])
 y_ = tf.placeholder("float", shape=[None, 10])
 sess = tf.InteractiveSession()
-mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+mnist = read_data_sets('MNIST_data', one_hot=True)
 FILEPATH = 'output/CNN/CNN_rate=0.01_Adam/'
-LEARN_RATE = 0.01
+LEARN_RATE = 1e-4 #在学习率为0.1时，模型基本学习不到什么有用的信息
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
