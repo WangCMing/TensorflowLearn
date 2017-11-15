@@ -13,12 +13,12 @@ mnist = read_data_sets('MNIST_data', one_hot=True)
 num_input = 784
 num_hidden_1 = 512
 num_hidden_2 = 256
-num_steps = 300
+num_steps = 30000
 batch_size = 50
 display_step = 100
 learning_rate =0.01
 
-FILEPATH ='output/AE/AE_rate=0.1_RMSPro/'
+FILEPATH ='output/AE/AE_rate=0.01_RMSPro'
 
 x = tf.placeholder("float",[None,num_input])
 
